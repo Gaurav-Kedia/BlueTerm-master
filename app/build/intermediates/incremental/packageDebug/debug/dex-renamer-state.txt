@@ -1,0 +1,4 @@
+#Thu Jun 06 12:24:25 IST 2019
+base.0=C\:\\Users\\GAURAV\\Desktop\\BlueTerm-master\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex
