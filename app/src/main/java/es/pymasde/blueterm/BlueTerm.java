@@ -1,24 +1,35 @@
 package es.pymasde.blueterm;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -27,7 +38,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.view.inputmethod.BaseInputConnection;
 import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.EditorInfo;
@@ -36,36 +46,25 @@ import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
-
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class BlueTerm extends Activity implements LocationListener{
+
+public class BlueTerm extends Activity implements LocationListener {
     // Intent request codes
     private static final int REQUEST_CONNECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
-    
-	public static final int ORIENTATION_SENSOR    = 0;
-	public static final int ORIENTATION_PORTRAIT  = 1;
-	public static final int ORIENTATION_LANDSCAPE = 2;
+
+    public static final int ORIENTATION_SENSOR = 0;
+    public static final int ORIENTATION_PORTRAIT = 1;
+    public static final int ORIENTATION_LANDSCAPE = 2;
 
 
     private static TextView mTitle;
@@ -95,21 +94,21 @@ public class BlueTerm extends Activity implements LocationListener{
      * from other messages in the log. Public because it's used by several
      * classes.
      */
-	public static final String LOG_TAG = "BlueTerm";
+    public static final String LOG_TAG = "BlueTerm";
 
     // Message types sent from the BluetoothReadService Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
     public static final int MESSAGE_READ = 2;
     public static final int MESSAGE_WRITE = 3;
     public static final int MESSAGE_DEVICE_NAME = 4;
-    public static final int MESSAGE_TOAST = 5;	
+    public static final int MESSAGE_TOAST = 5;
 
     // Key names received from the BluetoothChatService Handler
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
-	
-	private BluetoothAdapter mBluetoothAdapter = null;
-	
+    private static final int[][] COLOR_SCHEMES = {
+            {BLACK, WHITE}, {WHITE, BLACK}, {WHITE, BLUE}};
+
     /**
      * Our main view. Displays the emulated terminal screen.
      */
@@ -120,13 +119,18 @@ public class BlueTerm extends Activity implements LocationListener{
      * character set to be entered.
      */
     private TermKeyListener mKeyListener;
-		
-	
+
+
     private static BluetoothSerialService mSerialService = null;
-    
-	private static InputMethodManager mInputManager;
-	
-	private boolean mEnablingBT;
+    private static final int[] CONTROL_KEY_SCHEMES = {
+            KeyEvent.KEYCODE_DPAD_CENTER,
+            KeyEvent.KEYCODE_AT,
+            KeyEvent.KEYCODE_ALT_LEFT,
+            KeyEvent.KEYCODE_ALT_RIGHT,
+            KeyEvent.KEYCODE_VOLUME_DOWN,
+            KeyEvent.KEYCODE_VOLUME_UP
+    };
+    private static InputMethodManager mInputManager;
     private boolean mLocalEcho = false;
     private int mFontSize = 9;
     private int mColorId = 2;
@@ -136,7 +140,7 @@ public class BlueTerm extends Activity implements LocationListener{
     private int mIncomingEoL_0A = 0x0A;
     private int mOutgoingEoL_0D = 0x0D;
     private int mOutgoingEoL_0A = 0x0A;
-    
+
     private int mScreenOrientation = 0;
 
     private static final String LOCALECHO_KEY = "localecho";
@@ -153,49 +157,104 @@ public class BlueTerm extends Activity implements LocationListener{
     public static final int WHITE = 0xffffffff;
     public static final int BLACK = 0xff000000;
     public static final int BLUE = 0xff344ebd;
-
-    private static final int[][] COLOR_SCHEMES = {
-        {BLACK, WHITE}, {WHITE, BLACK}, {WHITE, BLUE}};
-
-    private static final int[] CONTROL_KEY_SCHEMES = {
-        KeyEvent.KEYCODE_DPAD_CENTER,
-        KeyEvent.KEYCODE_AT,
-        KeyEvent.KEYCODE_ALT_LEFT,
-        KeyEvent.KEYCODE_ALT_RIGHT,
-        KeyEvent.KEYCODE_VOLUME_DOWN,
-        KeyEvent.KEYCODE_VOLUME_UP
-    };
-//    private static final String[] CONTROL_KEY_NAME = {
+    //    private static final String[] CONTROL_KEY_NAME = {
 //        "Ball", "@", "Left-Alt", "Right-Alt"
 //    };
     private static String[] CONTROL_KEY_NAME;
+    // The Handler that gets information back from the BluetoothService
+    private final Handler mHandlerBT = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MESSAGE_STATE_CHANGE:
+                    if (DEBUG) Log.i(LOG_TAG, "MESSAGE_STATE_CHANGE: " + msg.arg1);
+                    switch (msg.arg1) {
+                        case BluetoothSerialService.STATE_CONNECTED:
+                            if (mMenuItemConnect != null) {
+                                mMenuItemConnect.setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+                                mMenuItemConnect.setTitle(R.string.disconnect);
+                            }
+
+                            mInputManager.showSoftInput(mEmulatorView, InputMethodManager.SHOW_IMPLICIT);
+
+//                    mTitle.setText( R.string.title_connected_to );
+//                    mTitle.append(" " + mConnectedDeviceName);
+                            break;
+
+                        case BluetoothSerialService.STATE_CONNECTING:
+//                    mTitle.setText(R.string.title_connecting);
+                            break;
+
+                        case BluetoothSerialService.STATE_LISTEN:
+                        case BluetoothSerialService.STATE_NONE:
+                            if (mMenuItemConnect != null) {
+                                mMenuItemConnect.setIcon(android.R.drawable.ic_menu_search);
+                                mMenuItemConnect.setTitle(R.string.connect);
+                            }
+
+                            mInputManager.hideSoftInputFromWindow(mEmulatorView.getWindowToken(), 0);
+
+//                    mTitle.setText(R.string.title_not_connected);
+
+                            break;
+                    }
+                    break;
+                case MESSAGE_WRITE:
+                    if (mLocalEcho) {
+                        byte[] writeBuf = (byte[]) msg.obj;
+                        mEmulatorView.write(writeBuf, msg.arg1);
+                    }
+
+                    break;
+/*
+            case MESSAGE_READ:
+                byte[] readBuf = (byte[]) msg.obj;
+                mEmulatorView.write(readBuf, msg.arg1);
+
+                break;
+*/
+                case MESSAGE_DEVICE_NAME:
+                    // save the connected device's name
+                    mConnectedDeviceName = msg.getData().getString(DEVICE_NAME);
+                    Toast.makeText(getApplicationContext(), getString(R.string.toast_connected_to) + " "
+                            + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
+                    break;
+                case MESSAGE_TOAST:
+                    Toast.makeText(getApplicationContext(), msg.getData().getString(TOAST), Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+    private BluetoothAdapter mBluetoothAdapter = null;
 
     private int mControlKeyCode;
 
     private SharedPreferences mPrefs;
-	
+
     private MenuItem mMenuItemConnect;
     private MenuItem mMenuItemStartStopRecording;
-    
-    private Dialog         mAboutDialog;
+    private boolean mEnablingBT;
+    private Dialog mAboutDialog;
 
-    
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
+    /**
+     * Called when the activity is first created.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
 
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
-		if (DEBUG)
-			Log.e(LOG_TAG, "+++ ON CREATE +++");
+        if (DEBUG)
+            Log.e(LOG_TAG, "+++ ON CREATE +++");
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         readPrefs();
 
         CONTROL_KEY_NAME = getResources().getStringArray(R.array.entries_controlkey_preference);
 
-    	mInputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);		
-		
+        mInputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
         // Set up the window layout
         //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.main);
@@ -205,20 +264,20 @@ public class BlueTerm extends Activity implements LocationListener{
 //        mTitle = (TextView) findViewById(R.id.title_left_text);
 //        mTitle.setText(R.string.app_name);
 //        mTitle = (TextView) findViewById(R.id.title_right_text);
-        
 
-		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-		if (mBluetoothAdapter == null) {
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        if (mBluetoothAdapter == null) {
             finishDialogNoBluetooth();
-			return;
-		}
-		
+            return;
+        }
+
         setContentView(R.layout.term_activity);
 
-        mEmulatorView = (EmulatorView) findViewById(R.id.emulatorView);
+        mEmulatorView = findViewById(R.id.emulatorView);
 
-        mEmulatorView.initialize( this );
+        mEmulatorView.initialize(this);
 
         mKeyListener = new TermKeyListener();
 
@@ -228,68 +287,27 @@ public class BlueTerm extends Activity implements LocationListener{
         mEmulatorView.register(mKeyListener);
 
         mSerialService = new BluetoothSerialService(this, mHandlerBT, mEmulatorView);
-        
-		if (DEBUG)
-			Log.e(LOG_TAG, "+++ DONE IN ON CREATE +++");
-	}
 
-	@Override
-	public void onStart() {
-		super.onStart();
-		if (DEBUG)
-			Log.e(LOG_TAG, "++ ON START ++");
-		
-		mEnablingBT = false;
-	}
+        if (DEBUG)
+            Log.e(LOG_TAG, "+++ DONE IN ON CREATE +++");
 
-	@Override
-	public synchronized void onResume() {
-		super.onResume();
+        Get_location ob = new Get_location();
+        LocationManager locationManager;
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        }
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, this);
 
-		if (DEBUG) {
-			Log.e(LOG_TAG, "+ ON RESUME +");
-		}
-		
-		if (!mEnablingBT) { // If we are turning on the BT we cannot check if it's enable
-		    if ( (mBluetoothAdapter != null)  && (!mBluetoothAdapter.isEnabled()) ) {
-			
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(R.string.alert_dialog_turn_on_bt)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle(R.string.alert_dialog_warning_title)
-                    .setCancelable( false )
-                    .setPositiveButton(R.string.alert_dialog_yes, new DialogInterface.OnClickListener() {
-                    	public void onClick(DialogInterface dialog, int id) {
-                    		mEnablingBT = true;
-                    		Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                    		startActivityForResult(enableIntent, REQUEST_ENABLE_BT);			
-                    	}
-                    })
-                    .setNegativeButton(R.string.alert_dialog_no, new DialogInterface.OnClickListener() {
-                    	public void onClick(DialogInterface dialog, int id) {
-                    		finishDialogNoBluetooth();            	
-                    	}
-                    });
-                AlertDialog alert = builder.create();
-                alert.show();
-		    }		
-		
-		    if (mSerialService != null) {
-		    	// Only if the state is STATE_NONE, do we know that we haven't started already
-		    	if (mSerialService.getState() == BluetoothSerialService.STATE_NONE) {
-		    		// Start the Bluetooth chat services
-		    		mSerialService.start();
-		    	}
-		    }
+    }
 
-		    if (mBluetoothAdapter != null) {
-		    	readPrefs();
-		    	updatePrefs();
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (DEBUG)
+            Log.e(LOG_TAG, "++ ON START ++");
 
-		    	mEmulatorView.onResume();
-		    }
-		}
-	}
+        mEnablingBT = false;
+    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -298,50 +316,98 @@ public class BlueTerm extends Activity implements LocationListener{
         mEmulatorView.updateSize();
     }
 
-	@Override
-	public synchronized void onPause() {
-		super.onPause();
-		if (DEBUG)
-			Log.e(LOG_TAG, "- ON PAUSE -");
+    @Override
+    public synchronized void onResume() {
+        super.onResume();
 
-		if (mEmulatorView != null) {
-			mInputManager.hideSoftInputFromWindow(mEmulatorView.getWindowToken(), 0);
-			mEmulatorView.onPause();
-		}
-	}
+        if (DEBUG) {
+            Log.e(LOG_TAG, "+ ON RESUME +");
+        }
+
+        if (!mEnablingBT) { // If we are turning on the BT we cannot check if it's enable
+            if ((mBluetoothAdapter != null) && (!mBluetoothAdapter.isEnabled())) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.alert_dialog_turn_on_bt)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle(R.string.alert_dialog_warning_title)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.alert_dialog_yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                mEnablingBT = true;
+                                Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                                startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+                            }
+                        })
+                        .setNegativeButton(R.string.alert_dialog_no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finishDialogNoBluetooth();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+
+            if (mSerialService != null) {
+                // Only if the state is STATE_NONE, do we know that we haven't started already
+                if (mSerialService.getState() == BluetoothSerialService.STATE_NONE) {
+                    // Start the Bluetooth chat services
+                    mSerialService.start();
+                }
+            }
+
+            if (mBluetoothAdapter != null) {
+                readPrefs();
+                updatePrefs();
+
+                mEmulatorView.onResume();
+            }
+        }
+    }
+
+    @Override
+    public synchronized void onPause() {
+        super.onPause();
+        if (DEBUG)
+            Log.e(LOG_TAG, "- ON PAUSE -");
+
+        if (mEmulatorView != null) {
+            mInputManager.hideSoftInputFromWindow(mEmulatorView.getWindowToken(), 0);
+            mEmulatorView.onPause();
+        }
+    }
 
     @Override
     public void onStop() {
         super.onStop();
-        if(DEBUG)
-        	Log.e(LOG_TAG, "-- ON STOP --");
+        if (DEBUG)
+            Log.e(LOG_TAG, "-- ON STOP --");
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (DEBUG)
+            Log.e(LOG_TAG, "--- ON DESTROY ---");
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		if (DEBUG)
-			Log.e(LOG_TAG, "--- ON DESTROY ---");
-		
         if (mSerialService != null)
-        	mSerialService.stop();
-        
-	}
+            mSerialService.stop();
+
+    }
 
     private void readPrefs() {
         mLocalEcho = mPrefs.getBoolean(LOCALECHO_KEY, mLocalEcho);
         mFontSize = readIntPref(FONTSIZE_KEY, mFontSize, 20);
         mColorId = readIntPref(COLOR_KEY, mColorId, COLOR_SCHEMES.length - 1);
         mControlKeyId = readIntPref(CONTROLKEY_KEY, mControlKeyId, CONTROL_KEY_SCHEMES.length - 1);
-        mAllowInsecureConnections = mPrefs.getBoolean( ALLOW_INSECURE_CONNECTIONS_KEY, mAllowInsecureConnections);
+        mAllowInsecureConnections = mPrefs.getBoolean(ALLOW_INSECURE_CONNECTIONS_KEY, mAllowInsecureConnections);
 
         mIncomingEoL_0D = readIntPref(INCOMING_EOL_0D_KEY, mIncomingEoL_0D, 0x0D0A);
         mIncomingEoL_0A = readIntPref(INCOMING_EOL_0A_KEY, mIncomingEoL_0A, 0x0D0A);
         mOutgoingEoL_0D = readIntPref(OUTGOING_EOL_0D_KEY, mOutgoingEoL_0D, 0x0D0A);
         mOutgoingEoL_0A = readIntPref(OUTGOING_EOL_0A_KEY, mOutgoingEoL_0A, 0x0D0A);
-        
-		mScreenOrientation = readIntPref(SCREENORIENTATION_KEY, mScreenOrientation, 2);
+
+        mScreenOrientation = readIntPref(SCREENORIENTATION_KEY, mScreenOrientation, 2);
     }
 
     private void updatePrefs() {
@@ -350,198 +416,129 @@ public class BlueTerm extends Activity implements LocationListener{
         mEmulatorView.setTextSize((int) (mFontSize * metrics.density));
         setColors();
         mControlKeyCode = CONTROL_KEY_SCHEMES[mControlKeyId];
-        mSerialService.setAllowInsecureConnections( mAllowInsecureConnections );
-        
+        mSerialService.setAllowInsecureConnections(mAllowInsecureConnections);
+
         if (mEmulatorView != null) {
-            mEmulatorView.setIncomingEoL_0D( mIncomingEoL_0D );
-            mEmulatorView.setIncomingEoL_0A( mIncomingEoL_0A );
+            mEmulatorView.setIncomingEoL_0D(mIncomingEoL_0D);
+            mEmulatorView.setIncomingEoL_0A(mIncomingEoL_0A);
         }
-        
-		switch (mScreenOrientation) {
-		case ORIENTATION_PORTRAIT:
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-			break;
-		case ORIENTATION_LANDSCAPE:
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-			break;
-		default:
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-		}
+
+        switch (mScreenOrientation) {
+            case ORIENTATION_PORTRAIT:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                break;
+            case ORIENTATION_LANDSCAPE:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                break;
+            default:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        }
     }
 
     private int readIntPref(String key, int defaultValue, int maxValue) {
         int val;
         try {
-            val = Integer.parseInt( mPrefs.getString(key, Integer.toString(defaultValue)) );
+            val = Integer.parseInt(mPrefs.getString(key, Integer.toString(defaultValue)));
         } catch (NumberFormatException e) {
             val = defaultValue;
         }
         val = Math.max(0, Math.min(val, maxValue));
         return val;
     }
-    
-	public int getConnectionState() {
-		return mSerialService.getState();
-	}
 
-	private byte[] handleEndOfLineChars( int outgoingEoL ) {
-		byte[] out;
-		
-	    if ( outgoingEoL == 0x0D0A ) {
-	    	out = new byte[2];
-	    	out[0] = 0x0D;
-	    	out[1] = 0x0A;
-		}
-	    else {
-		    if ( outgoingEoL == 0x00 ) {
-		    	out = new byte[0];
-		    }
-		    else {
-		    	out = new byte[1];
-		    	out[0] = (byte)outgoingEoL;
-		    }
-	    }
-		
-		return out;
-	}
+    public int getConnectionState() {
+        return mSerialService.getState();
+    }
+
+    private byte[] handleEndOfLineChars(int outgoingEoL) {
+        byte[] out;
+
+        if (outgoingEoL == 0x0D0A) {
+            out = new byte[2];
+            out[0] = 0x0D;
+            out[1] = 0x0A;
+        } else {
+            if (outgoingEoL == 0x00) {
+                out = new byte[0];
+            } else {
+                out = new byte[1];
+                out[0] = (byte) outgoingEoL;
+            }
+        }
+
+        return out;
+    }
 
     public void send(byte[] out) {
-    	
-    	if ( out.length == 1 ) {
-    		
-    		if ( out[0] == 0x0D ) {
-    			out = handleEndOfLineChars( mOutgoingEoL_0D );
-    		}
-    		else {
-        		if ( out[0] == 0x0A ) {
-        			out = handleEndOfLineChars( mOutgoingEoL_0A );
-        		}
-    		}
-    	}
-    	
-    	if ( out.length > 0 ) {
-    		mSerialService.write( out );
-    	}
+
+        if (out.length == 1) {
+
+            if (out[0] == 0x0D) {
+                out = handleEndOfLineChars(mOutgoingEoL_0D);
+            } else {
+                if (out[0] == 0x0A) {
+                    out = handleEndOfLineChars(mOutgoingEoL_0A);
+                }
+            }
+        }
+
+        if (out.length > 0) {
+            mSerialService.write(out);
+        }
     }
-    
-    public void toggleKeyboard() {
-  		mInputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-    }
-    
+
     public int getTitleHeight() {
 //    	return mTitle.getHeight();
         return 0;
     }
-    
-    // The Handler that gets information back from the BluetoothService
-    private final Handler mHandlerBT = new Handler() {
-    	
-        @Override
-        public void handleMessage(Message msg) {        	
-            switch (msg.what) {
-            case MESSAGE_STATE_CHANGE:
-                if(DEBUG) Log.i(LOG_TAG, "MESSAGE_STATE_CHANGE: " + msg.arg1);
-                switch (msg.arg1) {
-                case BluetoothSerialService.STATE_CONNECTED:
-                	if (mMenuItemConnect != null) {
-                		mMenuItemConnect.setIcon(android.R.drawable.ic_menu_close_clear_cancel);
-                		mMenuItemConnect.setTitle(R.string.disconnect);
-                	}
-                	
-                	mInputManager.showSoftInput(mEmulatorView, InputMethodManager.SHOW_IMPLICIT);
-                	
-//                    mTitle.setText( R.string.title_connected_to );
-//                    mTitle.append(" " + mConnectedDeviceName);
-                    break;
-                    
-                case BluetoothSerialService.STATE_CONNECTING:
-//                    mTitle.setText(R.string.title_connecting);
-                    break;
-                    
-                case BluetoothSerialService.STATE_LISTEN:
-                case BluetoothSerialService.STATE_NONE:
-                	if (mMenuItemConnect != null) {
-                		mMenuItemConnect.setIcon(android.R.drawable.ic_menu_search);
-                		mMenuItemConnect.setTitle(R.string.connect);
-                	}
 
-            		mInputManager.hideSoftInputFromWindow(mEmulatorView.getWindowToken(), 0);
-                	
-//                    mTitle.setText(R.string.title_not_connected);
+    public void toggleKeyboard() {
+        mInputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    }
 
-                    break;
-                }
-                break;
-            case MESSAGE_WRITE:
-            	if (mLocalEcho) {
-            		byte[] writeBuf = (byte[]) msg.obj;
-            		mEmulatorView.write(writeBuf, msg.arg1);
-            	}
-                
-                break;
-/*
-            case MESSAGE_READ:
-                byte[] readBuf = (byte[]) msg.obj;              
-                mEmulatorView.write(readBuf, msg.arg1);
-                
-                break;
-*/
-            case MESSAGE_DEVICE_NAME:
-                // save the connected device's name
-                mConnectedDeviceName = msg.getData().getString(DEVICE_NAME);
-                Toast.makeText(getApplicationContext(), getString(R.string.toast_connected_to) + " "
-                               + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
-                break;
-            case MESSAGE_TOAST:
-                Toast.makeText(getApplicationContext(), msg.getData().getString(TOAST), Toast.LENGTH_SHORT).show();
-                break;
-            }
-        }
-    };    
-
-    
     public void finishDialogNoBluetooth() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.alert_dialog_no_bt)
-        .setIcon(android.R.drawable.ic_dialog_info)
-        .setTitle(R.string.app_name)
-        .setCancelable( false )
-        .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
-                       finish();            	
-                   }
-               });
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setTitle(R.string.app_name)
+                .setCancelable(false)
+                .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                });
         AlertDialog alert = builder.create();
-        alert.show(); 
+        alert.show();
     }
-    
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(DEBUG) Log.d(LOG_TAG, "onActivityResult " + resultCode);
+        if (DEBUG) Log.d(LOG_TAG, "onActivityResult " + resultCode);
         switch (requestCode) {
-        
-        case REQUEST_CONNECT_DEVICE:
 
-            // When DeviceListActivity returns with a device to connect
-            if (resultCode == Activity.RESULT_OK) {
-                // Get the device MAC address
-                String address = data.getExtras()
-                                     .getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
-                // Get the BLuetoothDevice object
-                BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
-                // Attempt to connect to the device
-                mSerialService.connect(device);                
-            }
-            break;
+            case REQUEST_CONNECT_DEVICE:
 
-        case REQUEST_ENABLE_BT:
-            // When the request to enable Bluetooth returns
-            if (resultCode != Activity.RESULT_OK) {
-                Log.d(LOG_TAG, "BT not enabled");
-                
-                finishDialogNoBluetooth();                
-            }
+                // When DeviceListActivity returns with a device to connect
+                if (resultCode == Activity.RESULT_OK) {
+                    // Get the device MAC address
+                    String address = data.getExtras()
+                            .getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+                    // Get the BLuetoothDevice object
+                    BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+                    // Attempt to connect to the device
+                    mSerialService.connect(device);
+                }
+                break;
+
+            case REQUEST_ENABLE_BT:
+                // When the request to enable Bluetooth returns
+                if (resultCode != Activity.RESULT_OK) {
+                    Log.d(LOG_TAG, "BT not enabled");
+
+                    finishDialogNoBluetooth();
+                }
         }
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (handleControlKey(keyCode, true)) {
@@ -557,11 +554,11 @@ public class BlueTerm extends Activity implements LocationListener{
         int letter = mKeyListener.keyDown(keyCode, event);
 
         if (letter >= 0) {
-        	byte[] buffer = new byte[1];
-        	buffer[0] = (byte)letter;
-        	
-        	send( buffer );
-        	//mSerialService.write(buffer);
+            byte[] buffer = new byte[1];
+            buffer[0] = (byte) letter;
+
+            send(buffer);
+            //mSerialService.write(buffer);
         }
         return true;
     }
@@ -596,7 +593,7 @@ public class BlueTerm extends Activity implements LocationListener{
      * @param down
      */
     private boolean handleDPad(int keyCode, boolean down) {
-    	byte[] buffer = new byte[1];
+        byte[] buffer = new byte[1];
 
         if (keyCode < KeyEvent.KEYCODE_DPAD_UP ||
                 keyCode > KeyEvent.KEYCODE_DPAD_CENTER) {
@@ -605,41 +602,41 @@ public class BlueTerm extends Activity implements LocationListener{
 
         if (down) {
             if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-            	buffer[0] = '\r';
-            	//mSerialService.write( buffer );
-            	send( buffer );
+                buffer[0] = '\r';
+                //mSerialService.write( buffer );
+                send(buffer);
             } else {
                 char code;
                 switch (keyCode) {
-                case KeyEvent.KEYCODE_DPAD_UP:
-                    code = 'A';
-                    break;
-                case KeyEvent.KEYCODE_DPAD_DOWN:
-                    code = 'B';
-                    break;
-                case KeyEvent.KEYCODE_DPAD_LEFT:
-                    code = 'D';
-                    break;
-                default:
-                case KeyEvent.KEYCODE_DPAD_RIGHT:
-                    code = 'C';
-                    break;
+                    case KeyEvent.KEYCODE_DPAD_UP:
+                        code = 'A';
+                        break;
+                    case KeyEvent.KEYCODE_DPAD_DOWN:
+                        code = 'B';
+                        break;
+                    case KeyEvent.KEYCODE_DPAD_LEFT:
+                        code = 'D';
+                        break;
+                    default:
+                    case KeyEvent.KEYCODE_DPAD_RIGHT:
+                        code = 'C';
+                        break;
                 }
-            	buffer[0] = 27; // ESC
-            	//mSerialService.write( buffer );                    
-            	send( buffer );
+                buffer[0] = 27; // ESC
+                //mSerialService.write( buffer );
+                send(buffer);
                 if (mEmulatorView.getKeypadApplicationMode()) {
-                	buffer[0] = 'O';
-                	//mSerialService.write( buffer );
-                	send( buffer );
+                    buffer[0] = 'O';
+                    //mSerialService.write( buffer );
+                    send(buffer);
                 } else {
-                	buffer[0] = '[';
-                	//mSerialService.write( buffer );
-                	send( buffer );
+                    buffer[0] = '[';
+                    //mSerialService.write( buffer );
+                    send(buffer);
                 }
-            	buffer[0] = (byte)code;
-            	//mSerialService.write( buffer );
-            	send( buffer );
+                buffer[0] = (byte) code;
+                //mSerialService.write( buffer );
+                send(buffer);
             }
         }
         return true;
@@ -648,38 +645,45 @@ public class BlueTerm extends Activity implements LocationListener{
     private boolean isSystemKey(int keyCode, KeyEvent event) {
         return event.isSystem();
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu, menu);
         mMenuItemConnect = menu.getItem(0);
-        mMenuItemStartStopRecording = menu.getItem(3);        
+        mMenuItemStartStopRecording = menu.getItem(3);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.connect:
-        	
-        	if (getConnectionState() == BluetoothSerialService.STATE_NONE) {
-        		// Launch the DeviceListActivity to see devices and do scan
-        		Intent serverIntent = new Intent(this, DeviceListActivity.class);
-        		startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
-        	}
-        	else
-            	if (getConnectionState() == BluetoothSerialService.STATE_CONNECTED) {
-            		mSerialService.stop();
-		    		mSerialService.start();
-            	}
-            return true;
-        case R.id.preferences:
-        	doPreferences();
-            return true;
-        case R.id.menu_special_keys:
-            doDocumentKeys();
-            return true;
+            case R.id.connect:
+
+                if (getConnectionState() == BluetoothSerialService.STATE_NONE) {
+                    // Launch the DeviceListActivity to see devices and do scan
+                    Intent serverIntent = new Intent(this, DeviceListActivity.class);
+                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
+                } else if (getConnectionState() == BluetoothSerialService.STATE_CONNECTED) {
+                    mSerialService.stop();
+                    mSerialService.start();
+                }
+                return true;
+            case R.id.preferences:
+                doPreferences();
+                return true;
+            case R.id.menu_special_keys:
+                doDocumentKeys();
+                return true;
+            case R.id.get_loca:
+                /*Get_location ob = new Get_location();
+                LocationManager locationManager;
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                }
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, this);*/
+                //ob.getLocation();
+                return true;
         case R.id.menu_start_stop_save:
         	if (mMenuItemStartStopRecording.getTitle() == getString(R.string.menu_stop_logging) ) {
         		doStopRecording();
@@ -749,9 +753,9 @@ public class BlueTerm extends Activity implements LocationListener{
 	private void showAboutDialog() {
 		mAboutDialog = new Dialog(BlueTerm.this);
 		mAboutDialog.setContentView(R.layout.about);
-		mAboutDialog.setTitle( getString( R.string.app_name ) + " " + getString( R.string.app_version ));
-		
-		Button buttonOpen = (Button) mAboutDialog.findViewById(R.id.buttonDialog);
+		mAboutDialog.setTitle( getString( R.string.app_name ) + " " + getString( R.string.app_version));
+
+        Button buttonOpen = mAboutDialog.findViewById(R.id.buttonDialog);
 		buttonOpen.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1602,7 +1606,7 @@ class TerminalEmulator {
                     if (b < 32 || b > 126) {
                         printableB = ' ';
                     }
-                    Log.w(BlueTerm.LOG_TAG, "'" + Character.toString(printableB) + "' (" + Integer.toString(b) + ")");
+                    Log.w(BlueTerm.LOG_TAG, "'" + printableB + "' (" + b + ")");
                 }
 
         		if ( b == 0x0D ) {
@@ -1619,8 +1623,8 @@ class TerminalEmulator {
                 mProcessedCharCount++;
             } catch (Exception e) {
                 Log.e(BlueTerm.LOG_TAG, "Exception while processing character "
-                        + Integer.toString(mProcessedCharCount) + " code "
-                        + Integer.toString(b), e);
+                        + mProcessedCharCount + " code "
+                        + b, e);
             }
         }
     }
@@ -3314,7 +3318,7 @@ class EmulatorView extends View implements GestureDetector.OnGestureListener {
     private void send_message() {
         Get_location get = new Get_location();
 //        get.getLocation();
-        get.send_message_to(this.latitude, this.longitude);
+        get.send_message_to(latitude, longitude);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package es.pymasde.blueterm;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -27,10 +26,9 @@ public class Get_location extends AppCompatActivity implements LocationListener 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLocation();
     }
 
-    void getLocation() {
+    public void getLocation() {
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, this);
@@ -77,7 +75,11 @@ public class Get_location extends AppCompatActivity implements LocationListener 
         smsManager.sendTextMessage("+919078162515", null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude,
                 null, null);
 
-        smsManager.sendTextMessage("+919945056180", null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude,
+        /*smsManager.sendTextMessage("+919945056180", null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude,
+                null, null);*/
+
+        SmsManager s2 = SmsManager.getDefault();
+        s2.sendTextMessage("+919535349545", null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude,
                 null, null);
     }
 }

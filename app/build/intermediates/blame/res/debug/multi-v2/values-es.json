@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\GAURAV\\Desktop\\BlueTerm-master\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-es\\values-es.xml",
+            "outputFile": "/home/gaurav/AndroidStudioProjects/BlueTerm-master/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-es/values-es.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\GAURAV\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\9e3abc5136f3b7a8955b9efabd88418c\\res\\values-es\\values-es.xml",
+                    "source": "/home/gaurav/.gradle/caches/transforms-2/files-2.1/e2cbb73a2869e8b1278fb5c3d0c12f3c/res/values-es/values-es.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,7 +21,26 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\GAURAV\\Desktop\\BlueTerm-master\\app\\src\\main\\res\\values-es\\strings.xml",
+                    "source": "/home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/res/values-es/arrays.xml",
+                    "from": {
+                        "startLines": "44,50,89,67,18,106,83,97,75,60,31,113",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,2",
+                        "startOffsets": "1348,1564,2722,2059,680,3231,2575,3012,2349,1875,1032,3434",
+                        "endLines": "48,57,94,72,28,110,87,104,80,65,42,117",
+                        "endColumns": "19,19,19,19,19,19,19,19,19,19,19,17",
+                        "endOffsets": "1558,1827,2964,2301,988,3387,2716,3225,2527,2053,1342,3568"
+                    },
+                    "to": {
+                        "startLines": "2,7,15,21,27,38,43,48,56,62,68,80",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,320,588,835,1082,1395,1556,1702,1920,2103,2286,2601",
+                        "endLines": "6,14,20,26,37,42,47,55,61,67,79,84",
+                        "endColumns": "19,19,19,19,19,19,19,19,19,19,19,17",
+                        "endOffsets": "315,583,830,1077,1390,1551,1697,1915,2098,2281,2596,2735"
+                    }
+                },
+                {
+                    "source": "/home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/res/values-es/strings.xml",
                     "from": {
                         "startLines": "8,6,10,11,9,7,3,4,29,32,95,89,91,92,94,93,90,88,67,72,63,56,51,57,52,85,33,38,46,69,81,79,80,77,78,26,25,17,47,34,23,24,35,44,66,71,55,50,62,41,84,59,43,65,19,18,70,74,75,54,49,61,40,20,28,27,83,13,15,14",
                         "startColumns": "1,1,1,1,1,1,4,4,4,4,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,1,1",
@@ -38,7 +57,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\GAURAV\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\f17485fd9e386d86f21325d365bf3c0a\\res\\values-es\\values-es.xml",
+                    "source": "/home/gaurav/.gradle/caches/transforms-2/files-2.1/1413b9201717606fa351b6de4140d186/res/values-es/values-es.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -52,25 +71,6 @@
                         "startOffsets": "7607",
                         "endColumns": "100",
                         "endOffsets": "7703"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\GAURAV\\Desktop\\BlueTerm-master\\app\\src\\main\\res\\values-es\\arrays.xml",
-                    "from": {
-                        "startLines": "44,50,89,67,18,106,83,97,75,60,31,113",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,2",
-                        "startOffsets": "1348,1564,2722,2059,680,3231,2575,3012,2349,1875,1032,3434",
-                        "endLines": "48,57,94,72,28,110,87,104,80,65,42,117",
-                        "endColumns": "19,19,19,19,19,19,19,19,19,19,19,17",
-                        "endOffsets": "1558,1827,2964,2301,988,3387,2716,3225,2527,2053,1342,3568"
-                    },
-                    "to": {
-                        "startLines": "2,7,15,21,27,38,43,48,56,62,68,80",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,320,588,835,1082,1395,1556,1702,1920,2103,2286,2601",
-                        "endLines": "6,14,20,26,37,42,47,55,61,67,79,84",
-                        "endColumns": "19,19,19,19,19,19,19,19,19,19,19,17",
-                        "endOffsets": "315,583,830,1077,1390,1551,1697,1915,2098,2281,2596,2735"
                     }
                 }
             ]
