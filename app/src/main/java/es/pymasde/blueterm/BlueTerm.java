@@ -699,31 +699,24 @@ public class BlueTerm extends Activity implements LocationListener {
             case R.id.preferences:
                 doPreferences();
                 return true;
-            case R.id.menu_special_keys:
+            /*case R.id.menu_special_keys:
                 doDocumentKeys();
-                return true;
+                return true;*/
             case R.id.save_numbers:
                 start_save();
-                /*Get_location ob = new Get_location();
-                LocationManager locationManager;
-                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                }
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, this);*/
-                //ob.getLocation();
                 return true;
-        case R.id.menu_start_stop_save:
+        /*case R.id.menu_start_stop_save:
         	if (mMenuItemStartStopRecording.getTitle() == getString(R.string.menu_stop_logging) ) {
         		doStopRecording();
         	}	
         	else {
         		doStartRecording();
         	}
-            return true;
+            return true;*/
             
-        case R.id.menu_about:
+        /*case R.id.menu_about:
         	showAboutDialog();
-            return true;
+            return true;*/
         }
         return false;
     }
@@ -1526,7 +1519,6 @@ class TerminalEmulator {
      * @param screen the screen to render characters into.
      * @param columns the number of columns to emulate
      * @param rows the number of rows to emulate
-     * @param termOut the output file descriptor that talks to the pseudo-tty.
      */
     //public TerminalEmulator(Screen screen, int columns, int rows, FileOutputStream termOut) {
     public TerminalEmulator(Screen screen, int columns, int rows) {
