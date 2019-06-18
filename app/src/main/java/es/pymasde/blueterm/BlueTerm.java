@@ -14,6 +14,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -54,7 +56,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
+import es.pymasde.blueterm.data.DbHelper;
+
+import static es.pymasde.blueterm.data.Contract.Entry.NAME;
+import static es.pymasde.blueterm.data.Contract.Entry.NUMBER;
+import static es.pymasde.blueterm.data.Contract.Entry.TABLE_NAME;
+import static es.pymasde.blueterm.data.Contract.Entry._ID;
 
 
 public class BlueTerm extends Activity implements LocationListener {
@@ -297,6 +307,23 @@ public class BlueTerm extends Activity implements LocationListener {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
         }
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, this);
+
+        EmulatorView.list = new ArrayList<String>();
+        String[] proj = {
+                _ID, NAME, NUMBER};
+        DbHelper mDbHelper = new DbHelper(this);
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, proj, null, null, null, null, null);
+
+        int idColumnIndex = cursor.getColumnIndex(_ID);
+        int numberColumnIndex = cursor.getColumnIndex(NUMBER);
+
+        while (cursor.moveToNext()) {
+            int currentID = cursor.getInt(idColumnIndex);
+            String getnumber = cursor.getString(numberColumnIndex);
+
+            EmulatorView.list.add(getnumber);
+        }
 
     }
 
@@ -2697,6 +2724,7 @@ class EmulatorView extends View implements GestureDetector.OnGestureListener {
 
     public static double latitude;
     public static double longitude;
+    public static ArrayList<String> list = new ArrayList<String>();
 
     /**
      * We defer some initialization until we have been layed out in the view
@@ -3107,9 +3135,6 @@ class EmulatorView extends View implements GestureDetector.OnGestureListener {
 
     /**
      * Call this to initialize the view.
-     *
-     * @param termFd the file descriptor
-     * @param termOut the output stream for the pseudo-teletype
      */
     public void initialize(BlueTerm blueTerm) {
     	mBlueTerm = blueTerm;
@@ -3324,7 +3349,7 @@ class EmulatorView extends View implements GestureDetector.OnGestureListener {
     private void send_message() {
         Get_location get = new Get_location();
 //        get.getLocation();
-        get.send_message_to(latitude, longitude);
+        get.send_message_to(latitude, longitude, list);
     }
 
     @Override

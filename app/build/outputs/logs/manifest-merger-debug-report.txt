@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-36:12
+ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-37:12
 MERGED from [com.android.support:appcompat-v7:27.1.1] /home/gaurav/.gradle/caches/transforms-2/files-2.1/e2cbb73a2869e8b1278fb5c3d0c12f3c/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:27.1.1] /home/gaurav/.gradle/caches/transforms-2/files-2.1/e2b7d599f8491a86084f8a62d615c9e1/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/gaurav/.gradle/caches/transforms-2/files-2.1/08c0a14e5794d41334c891031fe97018/AndroidManifest.xml:17:1-22:12
@@ -15,9 +15,9 @@ MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/gaurav/.gradle/ca
 MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/gaurav/.gradle/caches/transforms-2/files-2.1/25455f0c4e5e505822c343512fb094a0/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/gaurav/.gradle/caches/transforms-2/files-2.1/b3ca7f034b707f0b8875ae01c27619e7/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.0] /home/gaurav/.gradle/caches/transforms-2/files-2.1/b340fcbfad9e79acae259569aab18e1f/AndroidManifest.xml:17:1-22:12
-INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:2:1-37:12
 	package
 		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:3:7-36
 		INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml
@@ -61,7 +61,7 @@ ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/Andro
 	android:name
 		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:13:22-72
 application
-ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:15:5-35:19
+ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:15:5-36:19
 	android:label
 		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:15:48-80
 	android:debuggable
@@ -101,17 +101,17 @@ ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/Andro
 	android:name
 		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:30:19-49
 activity#es.pymasde.blueterm.Register
-ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:31:9-33:53
+ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:31:9-34:54
 	android:parentActivityName
-		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:32:13-51
-	android:theme
 		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:33:13-51
+	android:theme
+		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:34:13-51
 	android:name
-		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:31:19-43
+		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:32:13-37
 activity#es.pymasde.blueterm.Get_location
-ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:34:9-49
+ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:35:9-50
 	android:name
-		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:34:19-47
+		ADDED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml:35:19-47
 uses-sdk
 INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/AndroidManifest.xml

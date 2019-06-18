@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import static es.pymasde.blueterm.data.Contract.Entry.TABLE_NAME;
 
+
 public class DbHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "SOS_DATABASE.db";

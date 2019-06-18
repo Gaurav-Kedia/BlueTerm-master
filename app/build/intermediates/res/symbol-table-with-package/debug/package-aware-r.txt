@@ -665,7 +665,6 @@ id menu_about
 id menu_special_keys
 id menu_start_stop_save
 id message
-id message_txt
 id middle
 id multiply
 id n1
@@ -741,7 +740,6 @@ id title_right_text
 id title_template
 id top
 id topPanel
-id txt
 id uniform
 id up
 id useLogo
