@@ -1064,6 +1064,10 @@
         "source": "/home/gaurav/.gradle/caches/transforms-2/files-2.1/e2cbb73a2869e8b1278fb5c3d0c12f3c/res/drawable-xxhdpi-v4/abc_ic_star_black_36dp.png"
     },
     {
+        "merged": "/home/gaurav/AndroidStudioProjects/BlueTerm-master/app/build/intermediates/res/merged/debug/layout_contact_activity.xml.flat",
+        "source": "/home/gaurav/AndroidStudioProjects/BlueTerm-master/app/src/main/res/layout/contact_activity.xml"
+    },
+    {
         "merged": "/home/gaurav/AndroidStudioProjects/BlueTerm-master/app/build/intermediates/res/merged/debug/layout_abc_screen_content_include.xml.flat",
         "source": "/home/gaurav/.gradle/caches/transforms-2/files-2.1/e2cbb73a2869e8b1278fb5c3d0c12f3c/res/layout/abc_screen_content_include.xml"
     },

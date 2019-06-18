@@ -106,8 +106,6 @@ public class BlueTerm extends Activity implements LocationListener {
     // Key names received from the BluetoothChatService Handler
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
-    private static final int[][] COLOR_SCHEMES = {
-            {BLACK, WHITE}, {WHITE, BLACK}, {WHITE, BLUE}};
 
     /**
      * Our main view. Displays the emulated terminal screen.
@@ -157,6 +155,8 @@ public class BlueTerm extends Activity implements LocationListener {
     public static final int WHITE = 0xffffffff;
     public static final int BLACK = 0xff000000;
     public static final int BLUE = 0xff344ebd;
+    private static final int[][] COLOR_SCHEMES = {
+            {BLACK, WHITE}, {WHITE, BLACK}, {WHITE, BLUE}};
     //    private static final String[] CONTROL_KEY_NAME = {
 //        "Ball", "@", "Left-Alt", "Right-Alt"
 //    };
@@ -675,7 +675,8 @@ public class BlueTerm extends Activity implements LocationListener {
             case R.id.menu_special_keys:
                 doDocumentKeys();
                 return true;
-            case R.id.get_loca:
+            case R.id.save_numbers:
+                start_save();
                 /*Get_location ob = new Get_location();
                 LocationManager locationManager;
                 locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -699,7 +700,12 @@ public class BlueTerm extends Activity implements LocationListener {
         }
         return false;
     }
-    
+
+    private void start_save() {
+        Intent intent123 = new Intent(this, Register.class);
+        startActivity(intent123);
+    }
+
     private void doPreferences() {
         startActivity(new Intent(this, TermPreferences.class));
     }

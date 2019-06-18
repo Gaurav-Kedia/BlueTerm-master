@@ -28,5 +28,10 @@
                   android:theme="@android:style/Theme.Dialog"
                   android:configChanges="orientation|keyboardHidden" />
         <activity android:name="TermPreferences"/>
+        <activity
+            android:name=".Register"
+            android:parentActivityName=".BlueTerm"
+            android:theme="@style/Theme.AppCompat" />
+        <activity android:name=".Get_location" />
     </application>
 </manifest>

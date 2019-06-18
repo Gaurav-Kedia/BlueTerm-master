@@ -648,7 +648,6 @@ id fill
 id fill_horizontal
 id fill_vertical
 id forever
-id get_loca
 id home
 id homeAsUp
 id icon
@@ -666,8 +665,14 @@ id menu_about
 id menu_special_keys
 id menu_start_stop_save
 id message
+id message_txt
 id middle
 id multiply
+id n1
+id n2
+id n3
+id n4
+id n5
 id never
 id new_devices
 id none
@@ -675,6 +680,11 @@ id normal
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id num1
+id num2
+id num3
+id num4
+id num5
 id paired_devices
 id parentPanel
 id preferences
@@ -686,6 +696,7 @@ id radio
 id right
 id right_icon
 id right_side
+id save_numbers
 id screen
 id scrollIndicatorDown
 id scrollIndicatorUp
@@ -719,6 +730,7 @@ id text
 id text2
 id textSpacerNoButtons
 id textSpacerNoTitle
+id texts
 id time
 id title
 id titleDividerNoCustom
@@ -729,6 +741,7 @@ id title_right_text
 id title_template
 id top
 id topPanel
+id txt
 id uniform
 id up
 id useLogo
@@ -767,6 +780,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout about
+layout contact_activity
 layout custom_title
 layout device_list
 layout device_name

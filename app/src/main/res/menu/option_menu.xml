@@ -30,7 +30,7 @@
           android:icon="@android:drawable/ic_menu_help"
     	  android:title="@string/menu_about" />
     <item
-        android:id="@+id/get_loca"
-        android:title="get location" />
+        android:id="@+id/save_numbers"
+        android:title="save numbers" />
 </menu>
 
