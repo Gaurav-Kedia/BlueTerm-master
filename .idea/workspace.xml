@@ -10,13 +10,14 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="074191d8-a92b-482b-9b82-d8972ed2285f" name="Default" comment="final version 5">
+    <list default="true" id="074191d8-a92b-482b-9b82-d8972ed2285f" name="Default" comment="final version 7">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/contact_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/contact_activity.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,11 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
-              <caret line="316" column="107" selection-start-line="316" selection-start-column="107" selection-end-line="316" selection-end-column="107" />
+            <state relative-caret-position="570">
+              <caret line="343" column="9" selection-start-line="343" selection-start-column="9" selection-end-line="343" selection-end-column="9" />
               <folding>
                 <element signature="e#6563#9176#0" />
                 <element signature="docComment;class#Screen#0" />
@@ -75,6 +76,28 @@
                 <element signature="method#keyDown#0;class#TermKeyListener#0" />
                 <element signature="docComment;method#keyUp#0;class#TermKeyListener#0" />
                 <element signature="method#keyUp#0;class#TermKeyListener#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/contact_activity.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="122" column="42" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="115" column="17" lean-forward="true" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -134,11 +157,11 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/data/DbHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/option_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/contact_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Get_location.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/data/Contract.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/contact_activity.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java" />
       </list>
     </option>
   </component>
@@ -160,6 +183,28 @@
             <path>
               <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="blueterm" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
@@ -494,11 +539,19 @@
       <option name="project" value="LOCAL" />
       <updated>1560922966503</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="final version 7">
+      <created>1560931132027</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1560931132028</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1348" height="990" extended-state="4" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18356375" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -530,12 +583,12 @@
       <window_info anchor="right" id="Flutter Outline" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Preview" order="6" weight="0.29028815" />
+      <window_info anchor="right" id="Preview" order="6" weight="0.28955454" />
       <window_info anchor="right" id="Gradle" order="7" />
       <window_info anchor="right" id="Fabric" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info anchor="right" id="Flutter Inspector" order="10" />
-      <window_info anchor="right" id="Device File Explorer" order="11" side_tool="true" weight="0.26574174" />
+      <window_info anchor="right" id="Device File Explorer" order="11" side_tool="true" weight="0.26497695" />
     </layout>
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -547,7 +600,8 @@
     <MESSAGE value="final version" />
     <MESSAGE value="final version 3" />
     <MESSAGE value="final version 5" />
-    <option name="LAST_COMMIT_MESSAGE" value="final version 5" />
+    <MESSAGE value="final version 7" />
+    <option name="LAST_COMMIT_MESSAGE" value="final version 7" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -687,30 +741,7 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/contact_activity.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="142" column="40" selection-start-line="142" selection-start-column="29" selection-end-line="142" selection-end-column="40" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$USER_HOME$/AndroidStudio/DeviceExplorer/samsung-sm_a505f-RZ8M42H92LD/data/data/es.pymasde.blueterm/databases/SOS_DATABASE.db" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2106">
-          <caret line="117" column="51" selection-start-line="117" selection-start-column="51" selection-end-line="117" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4337#4805#1" />
-            <element signature="e#4860#5328#1" />
-            <element signature="e#5383#5851#1" />
-            <element signature="e#5906#6374#1" />
-            <element signature="e#6429#6897#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Get_location.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="662">
@@ -753,8 +784,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="316" column="107" selection-start-line="316" selection-start-column="107" selection-end-line="316" selection-end-column="107" />
+        <state relative-caret-position="570">
+          <caret line="343" column="9" selection-start-line="343" selection-start-column="9" selection-end-line="343" selection-end-column="9" />
           <folding>
             <element signature="e#6563#9176#0" />
             <element signature="docComment;class#Screen#0" />
@@ -782,6 +813,24 @@
             <element signature="method#keyDown#0;class#TermKeyListener#0" />
             <element signature="docComment;method#keyUp#0;class#TermKeyListener#0" />
             <element signature="method#keyUp#0;class#TermKeyListener#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/contact_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="122" column="42" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="115" column="17" lean-forward="true" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

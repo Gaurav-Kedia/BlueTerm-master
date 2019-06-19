@@ -115,6 +115,22 @@ public class Register extends AppCompatActivity {
         sum4 = num4.getText().toString().trim();
         sum5 = num5.getText().toString().trim();
 
+        if (!sum1.substring(0, 3).equalsIgnoreCase("+91")) {
+            sum1 = "+91" + sum1;
+        }
+        if (!sum2.substring(0, 3).equalsIgnoreCase("+91")) {
+            sum2 = "+91" + sum2;
+        }
+        if (!sum3.substring(0, 3).equalsIgnoreCase("+91")) {
+            sum3 = "+91" + sum3;
+        }
+        if (!sum4.substring(0, 3).equalsIgnoreCase("+91")) {
+            sum4 = "+91" + sum4;
+        }
+        if (!sum5.substring(0, 3).equalsIgnoreCase("+91")) {
+            sum5 = "+91" + sum5;
+        }
+
         msg = messaget.getText().toString().trim();
         DbHelper Db = new DbHelper(Register.this);
         SQLiteDatabase db = Db.getWritableDatabase();

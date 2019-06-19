@@ -19,7 +19,7 @@
                 android:id="@+id/n1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="10dp"
                 android:hint="Enter Contact name" />
 
             <EditText
@@ -28,8 +28,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:hint="Enter Number"
-                android:inputType="number"
-                android:maxLength="10" />
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -43,7 +42,7 @@
                 android:id="@+id/n2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="10dp"
                 android:hint="Enter Contact name" />
 
             <EditText
@@ -52,8 +51,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:hint="Enter Number"
-                android:inputType="number"
-                android:maxLength="10" />
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -67,7 +65,7 @@
                 android:id="@+id/n3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="10dp"
                 android:hint="Enter Contact name" />
 
             <EditText
@@ -76,8 +74,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:hint="Enter Number"
-                android:inputType="number"
-                android:maxLength="10" />
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -91,7 +88,7 @@
                 android:id="@+id/n4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="10dp"
                 android:hint="Enter Contact name" />
 
             <EditText
@@ -100,8 +97,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:hint="Enter Number"
-                android:inputType="number"
-                android:maxLength="10" />
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -115,7 +111,7 @@
                 android:id="@+id/n5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="10dp"
                 android:hint="Enter Contact name" />
 
             <EditText
@@ -124,8 +120,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:hint="Enter Number"
-                android:inputType="number"
-                android:maxLength="10" />
+                android:inputType="number" />
 
         </LinearLayout>
 
