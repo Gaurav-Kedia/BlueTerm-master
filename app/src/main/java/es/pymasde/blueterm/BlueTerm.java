@@ -247,6 +247,25 @@ public class BlueTerm extends Activity implements LocationListener {
     private boolean mEnablingBT;
     private Dialog mAboutDialog;
 
+    String[] permissionString = {Manifest.permission.BLUETOOTH_ADMIN,
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.INTERNET,
+            Manifest.permission.SEND_SMS,
+            Manifest.permission.READ_PHONE_STATE};
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     /**
      * Called when the activity is first created.
      */
@@ -284,28 +303,29 @@ public class BlueTerm extends Activity implements LocationListener {
         }
 
         setContentView(R.layout.term_activity);
-
         mEmulatorView = findViewById(R.id.emulatorView);
-
         mEmulatorView.initialize(this);
-
         mKeyListener = new TermKeyListener();
-
         mEmulatorView.setFocusable(true);
         mEmulatorView.setFocusableInTouchMode(true);
         mEmulatorView.requestFocus();
         mEmulatorView.register(mKeyListener);
-
         mSerialService = new BluetoothSerialService(this, mHandlerBT, mEmulatorView);
-
         if (DEBUG)
             Log.e(LOG_TAG, "+++ DONE IN ON CREATE +++");
 
+        if (!hasPermissions(this, permissionString)) {
+            ActivityCompat.requestPermissions(this, permissionString, 1);
+        }
         LocationManager locationManager;
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, this);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, this);
 
         EmulatorView.list = new ArrayList<String>();
         EmulatorView.list.clear();
@@ -314,10 +334,8 @@ public class BlueTerm extends Activity implements LocationListener {
         DbHelper mDbHelper = new DbHelper(this);
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, proj, null, null, null, null, null);
-
         int idColumnIndex = cursor.getColumnIndex(_ID);
         int numberColumnIndex = cursor.getColumnIndex(NUMBER);
-
         while (cursor.moveToNext()) {
             int currentID = cursor.getInt(idColumnIndex);
             String getnumber = cursor.getString(numberColumnIndex);

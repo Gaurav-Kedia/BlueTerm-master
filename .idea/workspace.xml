@@ -10,19 +10,13 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="074191d8-a92b-482b-9b82-d8972ed2285f" name="Default" comment="final version 3">
+    <list default="true" id="074191d8-a92b-482b-9b82-d8972ed2285f" name="Default" comment="final version 5">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/menu_option_menu.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/menu_option_menu.xml.flat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Get_location.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Get_location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/contact_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/contact_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/option_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/option_menu.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,11 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3690">
-              <caret line="326" column="23" selection-start-line="326" selection-start-column="23" selection-end-line="326" selection-end-column="23" />
+            <state relative-caret-position="534">
+              <caret line="316" column="107" selection-start-line="316" selection-start-column="107" selection-end-line="316" selection-end-column="107" />
               <folding>
                 <element signature="e#6563#9176#0" />
                 <element signature="docComment;class#Screen#0" />
@@ -81,30 +75,6 @@
                 <element signature="method#keyDown#0;class#TermKeyListener#0" />
                 <element signature="docComment;method#keyUp#0;class#TermKeyListener#0" />
                 <element signature="method#keyUp#0;class#TermKeyListener#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Get_location.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2448">
-              <caret line="159" column="5" selection-start-line="159" selection-start-column="5" selection-end-line="159" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="199" selection-start-line="199" selection-end-line="199" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -142,6 +112,7 @@
       <find>&quot;Help is needed, please reach this location &quot; + &quot;https://maps.google.com/?q=&quot; + latitude + &quot;,&quot; + longitude</find>
       <find>EmulatorView.list</find>
       <find>list</find>
+      <find>permission</find>
     </findStrings>
     <replaceStrings>
       <replace>msg</replace>
@@ -164,16 +135,16 @@
         <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/data/DbHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/option_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/contact_activity.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Get_location.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/data/Contract.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="4">
     <option name="y" value="25" />
-    <option name="width" value="960" />
+    <option name="width" value="1348" />
     <option name="height" value="990" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -182,7 +153,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -192,56 +163,14 @@
             </path>
             <path>
               <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="blueterm" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="blueterm" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="blueterm" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="BlueTerm.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="menu" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="BlueTerm-master" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -558,13 +487,20 @@
       <option name="project" value="LOCAL" />
       <updated>1560853341384</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="final version 5">
+      <created>1560922966503</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1560922966503</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1920" height="990" extended-state="6" />
+    <frame x="0" y="25" width="1348" height="990" extended-state="4" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15795091" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18356375" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Build Variants" order="2" side_tool="true" />
       <window_info id="Designer" order="3" />
@@ -587,7 +523,7 @@
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32962137" />
       <window_info anchor="bottom" id="Gradle Console" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50053364" side_tool="true" weight="0.32945284" />
-      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.4994664" weight="0.32560834" />
+      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.4994664" weight="0.32520324" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -599,7 +535,7 @@
       <window_info anchor="right" id="Fabric" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info anchor="right" id="Flutter Inspector" order="10" />
-      <window_info active="true" anchor="right" id="Device File Explorer" order="11" side_tool="true" visible="true" weight="0.26574174" />
+      <window_info anchor="right" id="Device File Explorer" order="11" side_tool="true" weight="0.26574174" />
     </layout>
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -610,7 +546,8 @@
     <MESSAGE value="sos app" />
     <MESSAGE value="final version" />
     <MESSAGE value="final version 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="final version 3" />
+    <MESSAGE value="final version 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="final version 5" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -692,17 +629,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="33" column="48" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
-          <folding>
-            <element signature="e#903#921#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
     <entry file="file://$USER_HOME$/Android/Sdk/sources/android-27/android/database/sqlite/SQLiteOpenHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -769,32 +695,66 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+    <entry file="file://$USER_HOME$/AndroidStudio/DeviceExplorer/samsung-sm_a505f-RZ8M42H92LD/data/data/es.pymasde.blueterm/databases/SOS_DATABASE.db" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2106">
+          <caret line="117" column="51" selection-start-line="117" selection-start-column="51" selection-end-line="117" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4337#4805#1" />
+            <element signature="e#4860#5328#1" />
+            <element signature="e#5383#5851#1" />
+            <element signature="e#5906#6374#1" />
+            <element signature="e#6429#6897#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Get_location.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="662">
+          <caret line="150" column="5" selection-start-line="150" selection-start-column="5" selection-end-line="150" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3308#5939#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$USER_HOME$/AndroidStudio/DeviceExplorer/samsung-sm_a505f-RZ8M42H92LD/data/data/es.pymasde.blueterm/shared_prefs/MyPrefs.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/data/DbHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/data/Contract.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/data/DbHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AndroidStudio/DeviceExplorer/samsung-sm_a505f-RZ8M42H92LD/data/data/es.pymasde.blueterm/shared_prefs/MyPrefs.xml" />
-    <entry file="file://$USER_HOME$/AndroidStudio/DeviceExplorer/samsung-sm_a505f-RZ8M42H92LD/data/data/es.pymasde.blueterm/databases/SOS_DATABASE.db" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/BlueTerm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3690">
-          <caret line="326" column="23" selection-start-line="326" selection-start-column="23" selection-end-line="326" selection-end-column="23" />
+        <state relative-caret-position="534">
+          <caret line="316" column="107" selection-start-line="316" selection-start-column="107" selection-end-line="316" selection-end-column="107" />
           <folding>
             <element signature="e#6563#9176#0" />
             <element signature="docComment;class#Screen#0" />
@@ -822,28 +782,6 @@
             <element signature="method#keyDown#0;class#TermKeyListener#0" />
             <element signature="docComment;method#keyUp#0;class#TermKeyListener#0" />
             <element signature="method#keyUp#0;class#TermKeyListener#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Get_location.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2448">
-          <caret line="159" column="5" selection-start-line="159" selection-start-column="5" selection-end-line="159" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/pymasde/blueterm/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="199" selection-start-line="199" selection-end-line="199" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2056#2323#1" />
-            <element signature="e#3548#3556#0" expanded="true" />
           </folding>
         </state>
       </provider>
