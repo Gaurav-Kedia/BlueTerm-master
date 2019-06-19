@@ -301,7 +301,6 @@ public class BlueTerm extends Activity implements LocationListener {
         if (DEBUG)
             Log.e(LOG_TAG, "+++ DONE IN ON CREATE +++");
 
-        Get_location ob = new Get_location();
         LocationManager locationManager;
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -309,6 +308,7 @@ public class BlueTerm extends Activity implements LocationListener {
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, this);
 
         EmulatorView.list = new ArrayList<String>();
+        EmulatorView.list.clear();
         String[] proj = {
                 _ID, NAME, NUMBER};
         DbHelper mDbHelper = new DbHelper(this);
@@ -324,7 +324,10 @@ public class BlueTerm extends Activity implements LocationListener {
 
             EmulatorView.list.add(getnumber);
         }
+        cursor.close();
 
+        SharedPreferences sharedpreferences = getApplicationContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        EmulatorView.msg = sharedpreferences.getString("Send_message", null);
     }
 
     @Override
@@ -678,7 +681,7 @@ public class BlueTerm extends Activity implements LocationListener {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu, menu);
         mMenuItemConnect = menu.getItem(0);
-        mMenuItemStartStopRecording = menu.getItem(3);
+        //mMenuItemStartStopRecording = menu.getItem(3);
         return true;
     }
 
@@ -2717,6 +2720,7 @@ class EmulatorView extends View implements GestureDetector.OnGestureListener {
     public static double latitude;
     public static double longitude;
     public static ArrayList<String> list = new ArrayList<String>();
+    public static String msg;
 
     /**
      * We defer some initialization until we have been layed out in the view
@@ -3341,7 +3345,7 @@ class EmulatorView extends View implements GestureDetector.OnGestureListener {
     private void send_message() {
         Get_location get = new Get_location();
 //        get.getLocation();
-        get.send_message_to(latitude, longitude, list);
+        get.send_message_to(latitude, longitude, list, msg);
     }
 
     @Override

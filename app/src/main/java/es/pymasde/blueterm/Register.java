@@ -1,6 +1,8 @@
 package es.pymasde.blueterm;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,7 +23,7 @@ import static es.pymasde.blueterm.data.Contract.Entry._ID;
 
 public class Register extends AppCompatActivity {
 
-    EditText n1, n2, n3, n4, n5, num1, num2, num3, num4, num5;
+    EditText n1, n2, n3, n4, n5, num1, num2, num3, num4, num5, messaget;
     ArrayList<String> list = new ArrayList<String>();
     ArrayList<String> list1 = new ArrayList<>();
 
@@ -42,6 +44,10 @@ public class Register extends AppCompatActivity {
         num4 = findViewById(R.id.num4);
         num5 = findViewById(R.id.num5);
 
+        messaget = findViewById(R.id.message_txt);
+
+        list = new ArrayList<String>();
+        list.clear();
         String[] proj = {
                 _ID, NAME, NUMBER};
         DbHelper mDbHelper = new DbHelper(this);
@@ -60,6 +66,7 @@ public class Register extends AppCompatActivity {
             list.add(getnumber);
             list1.add(getname);
         }
+        cursor.close();
         if (list.size() != 0) {
             if (list.get(0) != null) {
                 num1.setText(list.get(0));
@@ -82,12 +89,20 @@ public class Register extends AppCompatActivity {
                 n5.setText(list1.get(4));
             }
         }
+        SharedPreferences sharedpreferences = getApplicationContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        messaget.setText(sharedpreferences.getString("Send_message", null));
 
     }
 
     public void save_to_SqLite(View view) {
         String s1, s2, s3, s4, s5, sum1, sum2, sum3, sum4, sum5, msg;
         long newRowId = 0;
+        ArrayList<String> updated_lists = new ArrayList<String>();
+        updated_lists.clear();
+
+        //list.clear();
+        EmulatorView.list.clear();
+
         s1 = n1.getText().toString().trim();
         s2 = n2.getText().toString().trim();
         s3 = n3.getText().toString().trim();
@@ -100,6 +115,7 @@ public class Register extends AppCompatActivity {
         sum4 = num4.getText().toString().trim();
         sum5 = num5.getText().toString().trim();
 
+        msg = messaget.getText().toString().trim();
         DbHelper Db = new DbHelper(Register.this);
         SQLiteDatabase db = Db.getWritableDatabase();
 
@@ -111,8 +127,8 @@ public class Register extends AppCompatActivity {
                 newRowId = db.insert(TABLE_NAME, null, cv1);
                 list.add(sum1);
             } else {
-                newRowId = db.update(Contract.Entry.TABLE_NAME, cv1, _ID + "=" + 1, null);
-                list.add(sum1);
+                newRowId = db.update(Contract.Entry.TABLE_NAME, cv1, _ID + " = ?", new String[]{"1"});
+                updated_lists.add(sum1);
             }
         }
 
@@ -125,8 +141,8 @@ public class Register extends AppCompatActivity {
                 newRowId = db.insert(TABLE_NAME, null, cv2);
                 list.add(sum2);
             } else {
-                newRowId = db.update(Contract.Entry.TABLE_NAME, cv2, _ID + "=" + 2, null);
-                list.add(sum2);
+                newRowId = db.update(Contract.Entry.TABLE_NAME, cv2, _ID + " = ?", new String[]{"2"});
+                updated_lists.add(sum2);
             }
         }
 
@@ -139,8 +155,8 @@ public class Register extends AppCompatActivity {
                 newRowId = db.insert(TABLE_NAME, null, cv3);
                 list.add(sum3);
             } else {
-                newRowId = db.update(Contract.Entry.TABLE_NAME, cv3, _ID + "=" + 3, null);
-                list.add(sum3);
+                newRowId = db.update(Contract.Entry.TABLE_NAME, cv3, _ID + " = ?", new String[]{"3"});
+                updated_lists.add(sum3);
             }
         }
 
@@ -153,8 +169,8 @@ public class Register extends AppCompatActivity {
                 newRowId = db.insert(TABLE_NAME, null, cv4);
                 list.add(sum4);
             } else {
-                newRowId = db.update(Contract.Entry.TABLE_NAME, cv4, _ID + "=" + 4, null);
-                list.add(sum4);
+                newRowId = db.update(Contract.Entry.TABLE_NAME, cv4, _ID + " = ?", new String[]{"4"});
+                updated_lists.add(sum4);
             }
         }
 
@@ -167,15 +183,31 @@ public class Register extends AppCompatActivity {
                 newRowId = db.insert(TABLE_NAME, null, cv5);
                 list.add(sum5);
             } else {
-                newRowId = db.update(Contract.Entry.TABLE_NAME, cv5, _ID + "=" + 5, null);
-                list.add(sum5);
+                newRowId = db.update(Contract.Entry.TABLE_NAME, cv5, _ID + " = ?", new String[]{"5"});
+                updated_lists.add(sum5);
             }
         }
 
         EmulatorView.list = new ArrayList<String>();
-        EmulatorView.list = (ArrayList<String>) list.clone();
+        EmulatorView.list.clear();
+        if (list.size() == 5) {
+            EmulatorView.list = (ArrayList<String>) list.clone();
+        }
+        if (updated_lists.size() == 5) {
+            EmulatorView.list = (ArrayList<String>) updated_lists.clone();
+        }
         list = new ArrayList<String>();
+        list.clear();
+        updated_lists = new ArrayList<String>();
+        updated_lists.clear();
+
         Toast.makeText(Register.this, "Saved", Toast.LENGTH_SHORT).show();
+
+        SharedPreferences sharedpreferences = getApplicationContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString("Send_message", msg);
+        EmulatorView.msg = msg;
+        editor.apply();
         finish();
     }
 }

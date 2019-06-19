@@ -2,8 +2,6 @@ package es.pymasde.blueterm;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -17,13 +15,6 @@ import android.telephony.SmsManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import es.pymasde.blueterm.data.DbHelper;
-
-import static es.pymasde.blueterm.data.Contract.Entry.NAME;
-import static es.pymasde.blueterm.data.Contract.Entry.NUMBER;
-import static es.pymasde.blueterm.data.Contract.Entry.TABLE_NAME;
-import static es.pymasde.blueterm.data.Contract.Entry._ID;
 
 /**
  * Created by GAURAV on 06-06-2019.
@@ -80,7 +71,7 @@ public class Get_location extends AppCompatActivity implements LocationListener 
     }
 
 
-    public void send_message_to(double latitude, double longitude, ArrayList<String> lists) {
+    public void send_message_to(double latitude, double longitude, ArrayList<String> lists, String msg) {
         // lists.add("+919078162515");
         /*lists.add("+917038350781");
         lists.add("+917204789088");
@@ -88,92 +79,74 @@ public class Get_location extends AppCompatActivity implements LocationListener 
         lists.add("+919535349545");
         lists.add("+919945056180");*/
 
+        msg = msg + "   Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude;
         System.out.println("numbers are");
         System.out.println(lists);
+        System.out.println(msg);
         SmsManager sms = SmsManager.getDefault();
 
         if (lists != null) {
             switch (lists.size()) {
                 case 1:
                     if (lists.get(0) != null) {
-                        sms.sendTextMessage(lists.get(0), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(0), null, msg, null, null);
                     }
                     break;
 
                 case 2:
                     if (lists.get(0) != null) {
-                        sms.sendTextMessage(lists.get(0), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(0), null, msg, null, null);
                     }
                     if (lists.get(1) != null) {
-                        sms.sendTextMessage(lists.get(1), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(1), null, msg, null, null);
                     }
                     break;
 
                 case 3:
                     if (lists.get(0) != null) {
-                        sms.sendTextMessage(lists.get(0), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(0), null, msg, null, null);
                     }
                     if (lists.get(1) != null) {
-                        sms.sendTextMessage(lists.get(1), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(1), null, msg, null, null);
                     }
                     if (lists.get(2) != null) {
-                        sms.sendTextMessage(lists.get(2), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude,
+                        sms.sendTextMessage(lists.get(2), null, msg,
                                 null, null);
                     }
                     break;
                 case 4:
                     if (lists.get(0) != null) {
-                        sms.sendTextMessage(lists.get(0), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(0), null, msg, null, null);
                     }
                     if (lists.get(1) != null) {
-                        sms.sendTextMessage(lists.get(1), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(1), null, msg, null, null);
                     }
                     if (lists.get(2) != null) {
-                        sms.sendTextMessage(lists.get(2), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(2), null, msg, null, null);
                     }
                     if (lists.get(3) != null) {
-                        sms.sendTextMessage(lists.get(3), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(3), null, msg, null, null);
                     }
                     break;
 
                 case 5:
                     if (lists.get(0) != null) {
-                        sms.sendTextMessage(lists.get(0), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(0), null, msg, null, null);
                     }
                     if (lists.get(1) != null) {
-                        sms.sendTextMessage(lists.get(1), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(1), null, msg, null, null);
                     }
                     if (lists.get(2) != null) {
-                        sms.sendTextMessage(lists.get(2), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(2), null, msg, null, null);
                     }
                     if (lists.get(3) != null) {
-                        sms.sendTextMessage(lists.get(3), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(3), null, msg, null, null);
                     }
                     if (lists.get(4) != null) {
-                        sms.sendTextMessage(lists.get(4), null, "Help is needed, please reach this location " + "https://maps.google.com/?q=" + latitude + "," + longitude, null, null);
+                        sms.sendTextMessage(lists.get(4), null, msg, null, null);
                     }
                     break;
             }
         }
-    }
-
-    public ArrayList<String> data() {
-        ArrayList<String> list = new ArrayList<String>();
-        String[] proj = {
-                _ID, NAME, NUMBER};
-        DbHelper mDbHelper = new DbHelper(this);
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, proj, null, null, null, null, null);
-
-        int idColumnIndex = cursor.getColumnIndex(_ID);
-        int numberColumnIndex = cursor.getColumnIndex(NUMBER);
-
-        while (cursor.moveToNext()) {
-            int currentID = cursor.getInt(idColumnIndex);
-            String getnumber = cursor.getString(numberColumnIndex);
-
-            list.add(getnumber);
-        }
-        return list;
     }
 }
